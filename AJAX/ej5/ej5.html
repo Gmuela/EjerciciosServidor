@@ -12,6 +12,12 @@
             
             var tipoFiltro=document.getElementById("tipoFiltro").value;
             var filtro=document.getElementById("filtro").value;
+            
+            if(filtro==""){
+                
+                alert("No ha indicado ningún valor para filtrar. A continuación se mostrará toda la base de datos de empleados");
+                
+            }
 
             xmlhttp.send("tipoFiltro="+tipoFiltro+"&filtro="+filtro);
 
@@ -22,13 +28,23 @@
                     var respuesta=xmlhttp.responseText;
                     
                     document.getElementById("tablaDatos").innerHTML=respuesta;
-
-
                 }                    
             }
         } 
     
-    </script>    
+    </script>
+    
+    <style>
+    
+        *{
+            
+            margin: 0 auto;
+            padding: 3px;
+            
+        }
+        
+    </style>
+    
 </head>
 <body>
     

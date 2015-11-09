@@ -12,15 +12,24 @@
 
     $return="<table><tr><th>Nombre</th><th>Apellido</th><th>Teléfono</th></tr><tr>";
 
-    if(isset($_REQUEST["lang"])){  
+    if(isset($_REQUEST["tipoFiltro"]) && $_REQUEST["filtro"]!=""){  
         
         foreach($BDempleados as $v){
             
             foreach($v as $k=>$v2){
                 
-                
-                $return.="<td>".$v2."</td>";
-                
+                if($k==$_REQUEST["tipoFiltro"]){
+                    
+                    $encontrado=strpos($v2, $_REQUEST["filtro"]);
+                    
+                    if($encontrado!==false){
+                        
+                        foreach($v as $k2=>$v3){
+                           
+                             $return.="<td>".$v3."</td>";                 
+                        } 
+                    }
+                }              
             }
             
             $return.="</tr>";
@@ -31,10 +40,26 @@
         
         echo "$return";
     }
+        
        
     else{
         
-        echo "ERROR";
+        foreach($BDempleados as $v){
+            
+            foreach($v as $k=>$v2){
+                     
+                $return.="<td>".$v2."</td>";
+                    
+                              
+            }
+            
+            $return.="</tr>";
+            
+        }
+
+        $return.="</table>";
+        
+        echo "$return";
     }
     
 ?>
