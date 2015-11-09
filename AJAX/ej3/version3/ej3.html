@@ -1,0 +1,45 @@
+<html>
+    <meta charset="utf-8">
+    <script>
+        
+        var palabras=new Array();
+        palabras["es"]=["Palabra","Traducción","Enviar"];
+        palabras["fr"]=["Mot","Traduction","Envoyer"];
+        palabras["en"]=["Word","Translation","Send"];
+    
+        function cambia(){
+            
+            var idioma=document.querySelector('input[name="lang"]:checked').value;
+            
+            document.getElementById("result").innerHTML=palabras[idioma][0]+"<input type=\"text\"/></br>"+palabras[idioma][1]+"<input type=\"text\"/></br><input type=\"button\" value=\""+palabras[idioma][2]+"\">";
+            
+            
+        }
+    
+    </script>
+    
+    <style>
+        img{
+            
+            width=10%;
+            height: 10%;
+            
+        }
+    
+    </style>
+<body>
+
+    <img src="../img/es.png"><input type="radio" name="lang" value="es" checked="checked" onchange="cambia()"/>
+    <img src="../img/fr.png"><input type="radio" name="lang" value="fr" onchange="cambia()"/>
+    <img src="../img/en.png"><input type="radio" name="lang" value="en" onchange="cambia()"/>
+    </br>
+    </br>
+    <div id="result">
+        Palabra <input type="text"/></br>
+        Traducción <input type="text"/></br>
+        <input type="button" value="Enviar">
+    </div>
+    
+    
+</body>
+</html>

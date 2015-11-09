@@ -1,0 +1,111 @@
+<html>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+<title>Formulario completo</title>
+</head>
+<body>
+	<h1>Formulario con múltiples campos</h1>
+    
+	<b>CAMPOS DE TEXTO:</b>
+    
+	<form name="formulario1" enctype="multipart/form-data" method="get" action="ej8.php">
+        <br/> Nombre:
+	    <input type="text" name="txtNombre" value="Pepe" />
+	    <br/>
+        
+		Contraseña: <input type="password" name="pswClave"
+        <br/> 
+        <br/> 
+        
+        Oculto
+		<input type="hidden" name="hdnOculto" value="" /> 
+       
+		<hr/>
+        
+		<b>RADIO:</b> 
+        <br/> 
+        &nbsp;&nbsp; Rojo <input type="radio" value="Rojo" name="rdSemaforo" /> 
+        <br/> 
+        &nbsp;&nbsp; Naranja <input type="radio" value="Naranja" name="rdSemaforo" checked="true" />
+        <br/>       
+		&nbsp;&nbsp; Verde <input type="radio" value="Verde" name="rdSemaforo" />
+	
+		<hr/>
+        
+		<b>CHECKBOX:</b> 
+        <br/> 
+        &nbsp;&nbsp; Quiero recibir publicidad <input type="checkbox" name="chkPubli" /> 
+        
+        <hr/> 
+               
+        <b>MULTI CHECKBOX:</b>
+        <br/>
+		<!-- Se declara el nombre terminado en [] para tratarlo en PHP como un array -->
+		&nbsp;&nbsp; <label>Inglés</label> <input type="checkbox" name="cbIdioma[]" value="English" />
+        <br/> 
+        &nbsp;&nbsp; <label>Francés</label> <input	type="checkbox" name="cbIdioma[]" checked="true" value="Français"/>
+        <br/> 
+		&nbsp;&nbsp; <label>Alemán</label> <input type="checkbox" name="cbIdioma[]" value="Deutch" />
+		<br/> 
+        <hr/>
+        
+		<b>SELECT: </b> 
+        <br/> 
+        <br/> 
+        <b>Simple:</b> 
+        <br/> 
+        Año de finalización de	estudios: 
+        <select name="selAnioFinEstudios">
+            
+			<option value="2010">2010</option>
+			<option value="2011" selected="true">2011</option>
+			<option value="2012">2012</option>
+                    
+		</select> 
+        
+        <br/>
+        <br/>
+        
+        <b>Múltiple:</b> 
+        
+        <br/>
+               
+        Ciudades:
+        <br/>
+		<!-- Se declara el nombre terminado en [] para tratarlo en PHP como un array -->
+		<select name="selCodigosPostales[]" multiple="multiple">
+            
+			<option value="17">Gerona</option>
+			<option value="28" selected="true">Madrid</option>
+			<option value="50" selected="true">Zaragoza</option>
+            
+		</select> 
+        
+        <br/>
+		<hr />
+		<b>TEXTAREA:</b> <br/> 
+        Comentarios
+		<textarea name="txaComentarios"> </textarea>
+        
+		<hr />
+        
+		<b>ARCHIVO:</b>
+        
+        <br /> 
+        
+        <input type="file" name="flArchivo" />
+        
+		<hr />     
+        
+		<b>BOTONES:</b> <br /> 
+        <input type="button" value="Mostrar un mensaje" onclick="alert('Un botón genérico');" />
+        <br/>
+		<input type="submit" value="Enviar formulario al servidor" /> 
+        <br/>
+        <input type="image"	src="flecha-verde.jpg" width="30" height="30" title="Equivalente a submit" name="imagen"/>
+        <br/>
+        <input type="reset" value="Resetear el formulario" />
+	</form>
+	
+</body>
+</html>

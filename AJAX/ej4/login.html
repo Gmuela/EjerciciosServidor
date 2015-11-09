@@ -1,0 +1,62 @@
+<html>
+    <meta charset="utf-8">
+    <script> 
+    
+        function ajax(){
+                
+                var xmlhttp=new XMLHttpRequest();
+                
+                var idioma=document.querySelector('input[name="lang"]:checked').value;
+                
+                xmlhttp.open("POST","loginAjax.php",true);
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlhttp.send("lang="+idioma);
+                xmlhttp.onreadystatechange=function(){
+                    
+                    if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                        
+                        var respuesta=xmlhttp.responseText.split("&")
+                        
+                        document.getElementById("texto1").innerHTML=respuesta[0];
+                        document.getElementById("texto2").innerHTML=respuesta[1];
+                        document.getElementById("texto3").value=respuesta[2];
+                        
+                    }                    
+                }
+            }
+        
+        function login(){
+            
+            document.getElementById("form").submit();
+            
+        }
+    
+    </script>
+    
+    <style>
+        img{            
+            width=10%;
+            height: 10%;            
+        }
+        
+        *{
+            
+            margin: 2px;
+        }
+    
+    </style>
+<body>
+    
+    <img src="img/es.png"><input type="radio" name="lang" value="es" checked="checked" onchange="ajax()"/>
+    <img src="img/en.png"><input type="radio" name="lang" value="en" onchange="ajax()"/>    
+    </br>
+    </br>
+    <div id="result">
+        <form id="form" method="post" action="login.php">
+        <label id="texto1">Usuario</label><input type="text" name="user"/></br>
+        <label id="texto2">Contraseña</label> <input type="password" name="pass"/></br>
+        <input id="texto3" type="button" value="Entrar" onclick="login()">
+        </form>
+    </div>
+</body>
+</html>

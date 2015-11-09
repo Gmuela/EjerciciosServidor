@@ -1,0 +1,35 @@
+<html>
+    <meta charset="utf-8">
+    <script> 
+    
+        function submit(){
+            
+            document.getElementById("formulario").submit();
+                        
+        }
+    
+    </script>
+    
+    <style>
+        img{
+            
+            width=10%;
+            height: 10%;
+            
+        }
+    
+    </style>
+<body>
+    <form method="post" action="ej3.php" id="formulario">
+    <img src="../img/es.png"><input type="radio" name="lang" value="es" checked="checked" onchange="submit()"/>
+    <img src="../img/en.png"><input type="radio" name="lang" value="en" onchange="submit()"/>
+    <img src="../img/fr.png"><input type="radio" name="lang" value="fr" onchange="submit()"/>
+    </form>
+    </br> 
+    Palabra <input type="text"/></br>
+    Traducción <input type="text"/></br>
+    <input type="button" value="Enviar">
+    
+    
+</body>
+</html>

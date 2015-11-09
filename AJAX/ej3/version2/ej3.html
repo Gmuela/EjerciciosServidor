@@ -1,0 +1,50 @@
+<html>
+    <meta charset="utf-8">
+    <script> 
+    
+        function ajax(){
+                
+                var xmlhttp=new XMLHttpRequest();
+                
+                var idioma=document.querySelector('input[name="lang"]:checked').value;
+                
+                xmlhttp.open("POST","ej3Ajax.php",true);
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlhttp.send("lang="+idioma);
+                xmlhttp.onreadystatechange=function(){
+                    
+                    if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                        
+                        var respuesta=xmlhttp.responseText.split("&")
+                        
+                        document.getElementById("texto1").innerHTML=respuesta[0];
+                        document.getElementById("texto2").innerHTML=respuesta[1];
+                        document.getElementById("texto3").value=respuesta[2];
+                        
+                    }                    
+                }
+            }
+    
+    </script>
+    
+    <style>
+        img{            
+            width=10%;
+            height: 10%;            
+        }
+    
+    </style>
+<body>
+    
+    <img src="../img/es.png"><input type="radio" name="lang" value="es" checked="checked" onchange="ajax()"/>
+    <img src="../img/en.png"><input type="radio" name="lang" value="en" onchange="ajax()"/>
+    <img src="../img/fr.png"><input type="radio" name="lang" value="fr" onchange="ajax()"/>
+    
+    </br>
+    <div id="result">
+        <label id="texto1">Palabra</label><input type="text"/></br>
+        <label id="texto2">Traducción</label> <input type="text"/></br>
+        <input id="texto3" type="button" value="Enviar">
+    </div>
+</body>
+</html>
