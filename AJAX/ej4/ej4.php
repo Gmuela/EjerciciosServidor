@@ -4,7 +4,7 @@
         
         var rand="";
         var userNumber="";
-        var idioma=document.querySelector('input[name="lang"]:checked').value;
+        var idioma='es';
         var resultIgual="¡Enhorabuena!";
         var resultMayor="Lo siento, tu número es mayor";
         var resultMenor="Lo siento, tu número es menor";
@@ -65,8 +65,7 @@
             rand = (Math.round(Math.random()*9)+1);            
 
             document.getElementById("resp1").innerHTML=rand;
-            document.getElementById("resp2").innerHTML=userNumber;
-            alert(resultIgual);
+            document.getElementById("resp2").innerHTML=userNumber;            
             
             if(userNumber==rand){
               
@@ -83,13 +82,7 @@
               
                 document.getElementById("texto6").innerHTML=resultMenor;
                 
-            }
-            
-            
-
-
-                                    
-                       
+            }     
         }
     
     </script>

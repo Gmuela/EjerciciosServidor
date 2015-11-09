@@ -1,0 +1,54 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    
+    <script>
+    
+        function filtrar(){
+            
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.open("POST","ej5Ajax.php",true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            
+            var tipoFiltro=document.getElementById("tipoFiltro").value;
+            var filtro=document.getElementById("filtro").value;
+
+            xmlhttp.send("tipoFiltro="+tipoFiltro+"&filtro="+filtro);
+
+            xmlhttp.onreadystatechange=function(){
+
+                if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                    
+                    var respuesta=xmlhttp.responseText;
+                    
+                    document.getElementById("tablaDatos").innerHTML=respuesta;
+
+
+                }                    
+            }
+        } 
+    
+    </script>    
+</head>
+<body>
+    
+    <h2>Lista de empleados</h2>
+    <br/>  
+    <input type="button" onclick="filtrar()" value="Filtrar por"/>
+    <select id="tipoFiltro" name="tipoFiltro">
+    
+        <option value="nombre">Nombre</option>
+        <option value="apellido">Apellido</option>
+        <option value="telf">Teléfono</option>
+    
+    </select>
+    
+    <input type="text" name="filtro" id="filtro"/>
+    
+    <table id="tablaDatos">
+    
+        <td><th>Nombre</th><th>Apellido</th><th>Teléfono</th></td>    
+    
+    </table>    
+</body>
+</html>
