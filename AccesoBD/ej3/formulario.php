@@ -15,17 +15,14 @@ if(!$resultSelect){
 
 else{
 
-    $mostrar="<table><tr><th>Nombre</th><th>Precio</th></tr>";
+    $mostrar="<tr><th>Nombre</th><th>Precio</th></tr>";
 
     foreach($resultSelect as $v){
 
         $mostrar.="<tr><td>{$v["nombre"]}</td><td>{$v["precio"]}</td></tr>";
 
     }
-
-    $mostrar.="</table>";
-    
-    }
+}
 
 
 ?>
@@ -67,10 +64,10 @@ else{
     
     <form method="get" action="ej3.php">
     
-    Nombre producto<input type="text" name="nombre" id="nombre"/>
+    Nombre producto<input type="text" id="nombre"/>
     <br/>
     <br/>
-    Precio producto<input type="text" name="precio" id="precio"/>
+    Precio producto<input type="text" id="precio"/>
     <br/>
     <br/>        
     <input type="button" value="Preparar" onclick="preparar()"/>
@@ -79,13 +76,15 @@ else{
     
     </form>
     
-    Productos preparados para insertar:<br/><br/>
-    <table id="preparados"><table>
+    Productos preparados para insertar:<br/><br/>  
     
-    Productos insertados
+    <table id="preparados"><th>Nombre</th><th>Precio</th></table>
+    <br/>
+    Productos insertados<br/><br/>
     
+    <table>
     <?=$mostrar?>
-    
-   
+    </table>
+      
 </body>
 </html>

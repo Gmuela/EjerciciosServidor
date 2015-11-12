@@ -8,11 +8,19 @@ $insert=<<<SQL
     value(:nombre,:precio)
 SQL;
 
+$productos=$_REQUEST["productos"];
+
+$arrayProd=explode("#",$productos);
+
 $preInsert=$baseDatos->prepare($insert);
 
-$preInsert->bindParam(":nombre",$_REQUEST["nombre"]);
-$preInsert->bindParam(":precio",$_REQUEST["precio"]);
-$preInsert->execute();  
+foreach($arrayProd as $k=>$v){
+        
+    $preInsert->bindParam(":nombre",$v);  
+        
+    $preInsert->bindParam(":precio",$v);
+        
+}
 
 echo "<h1>Producto insertado</h1><br/>";
     
