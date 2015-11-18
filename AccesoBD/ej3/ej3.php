@@ -18,8 +18,7 @@ foreach($arrayProd as $k=>$v){
         
     $preInsert->bindParam(":nombre",$v);  
         
-    $preInsert->bindParam(":precio",$v);
-        
+    $preInsert->bindParam(":precio",$v);         
 }
 
 echo "<h1>Producto insertado</h1><br/>";

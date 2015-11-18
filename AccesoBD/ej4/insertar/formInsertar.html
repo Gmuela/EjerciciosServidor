@@ -1,0 +1,49 @@
+<html>
+<head>
+    
+    <meta charset="utf-8"/>
+
+    <style>
+        
+        .contenido{
+            
+            text-align: center;
+            margin: 10px auto;
+            
+        }
+        
+        input{
+            
+            margin: 10px;
+            
+        }
+    
+    
+    </style>
+    
+    
+</head>
+<body>
+    
+    <div class="contenido">
+        <form method="get" action="insertar.php">
+            
+            Nº Empleado <input type="text" name="numemp" id="numemp"/><br/>
+            Nombre <input type="text" name="nombre" id="nombre"/><br/>
+            Apellido <input type="text" name="apellido" id="apellido"/><br/>
+            Teléfono <input type="text" name="telefono" id="telefono"/><br/>
+            Sexo <select name="sexo" id="sexo">
+            
+                <option value="hombre">Hombre</option>
+                <option value="mujer">Mujer</option>            
+            
+            </select><br/>
+            <input type="submit" value="Insertar nuevo empleado"/>
+        
+        
+        </form>
+        <input type="button" value="Volver al menú" onclick="location.href='menu.html'"/>
+    </div>
+    
+</body>
+</html>
