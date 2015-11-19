@@ -1,7 +1,101 @@
-<?php
+<html>
+<head>
+    
+    <meta charset="utf-8"/>
 
+    <style>
+        
+        .contenido{
+            
+            text-align: center;
+            margin: 10px auto;
+            
+        }
+        
+        input{
+            
+            margin: 10px;
+            
+        }
+    
+    
+    </style>
+    
+    <script>
+    
+        function consulta(){
+            
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.open("POST","modificar.php",true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            
+            var numemp=document.getElementById("numemp").value; 
 
+            xmlhttp.send("numemp="+numemp+"&recuperar="+true);
 
-echo "<input type=\"button\" value=\"Volver al menú\" onclick=\"location.href='menu.html'\"/><br/>";
+            xmlhttp.onreadystatechange=function(){
 
-?>
+                if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                    
+                    var respuesta=xmlhttp.responseText;
+                    
+                    if(respuesta==false){
+                        
+                        alert("Número de empleado no encontrado");
+                        
+                    }
+                    
+                    else{
+                        
+                        alert(respuesta);
+                        
+                        document.getElementById("numemp").value=respuesta;
+                        document.getElementById("nombre").value=respuesta;
+                        document.getElementById("apellido").value=respuesta;
+                        document.getElementById("telefono").value=respuesta;
+                        document.getElementById("sexo").innerHTML=respuesta;
+                        
+                        document.getElementById("numemp").removeAttribute("disabled");
+                        document.getElementById("nombre").removeAttribute("disabled");
+                        document.getElementById("apellido").removeAttribute("disabled");
+                        document.getElementById("telefono").removeAttribute("disabled");
+                        document.getElementById("sexo").removeAttribute("disabled");
+                        document.getElementById("recuperar").setAttribute("disabled");
+                    }
+                }                    
+            }
+            
+        }
+    
+    
+    </script>
+    
+    
+</head>
+<body>
+    
+    <div class="contenido">
+        <form method="get" action="modificar.php">
+            
+            <h2>Modificar epleado registrado</h2>
+            <h4>Escribe el Nº de Empleado ara recuperar sus datos</h4>
+            
+            Nº Empleado <input type="text" name="numemp" id="numemp" placeholder="Escribe el nº de empleado"/><br/>
+            Nombre <input type="text" name="nombre" id="nombre" disabled/><br/>
+            Apellido <input type="text" name="apellido" id="apellido" disabled/><br/>
+            Teléfono <input type="text" name="telefono" id="telefono" disabled/><br/>
+            Sexo <select name="sexo" id="sexo" disabled>
+            
+                <option value="hombre">Hombre</option>
+                <option value="mujer">Mujer</option>            
+            
+            </select><br/>
+            <input type="button" value="Recuperar datos" id="recuperar" onclick="consulta()"/>
+            <input type="submit" value="Modificar empleado" disabled/>
+        
+        </form>
+        <input type="button" value="Volver al menú" onclick="location.href='menu.html'"/>
+    </div>
+    
+</body>
+</html>
