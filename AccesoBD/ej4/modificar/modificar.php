@@ -7,8 +7,8 @@ $baseDatos=conectarMySQL();
 
 if(isset($_REQUEST["recuperar"])){
     
-    $consulta="SELECT * FRO empleado WHERE numemp='{$_REQUEST["numemp"]}'";
-
+    $consulta="SELECT * FROM empleados WHERE numemp={$_REQUEST["numemp"]}";
+    
     $resultado=$baseDatos->query($consulta);
 
     if(!$resultado){
@@ -17,29 +17,32 @@ if(isset($_REQUEST["recuperar"])){
     }
     
     else{
+        $solucionQuery='';
+        foreach ($resultado as $f) {
+            
+            $solucionQuery=("{$f['numemp']}#{$f['nombre']}#{$f['apellido']}#{$f['sexo']}#{$f['telefono']}");
+        }
         
-        echo $resultado;   
-        
+        echo $solucionQuery;
     }
 }
 
 
 else{
     
-    $insert=<<<SQL
-            insert into empleados(numemp,nombre,apellido,telefono,sexo)
-            value(:numemp,:nombre,:apellido,:telefono,:sexo)
-    SQL;
-
-    $resultado=$baseDatos->prepare($insert);
-
-    $numemp=$_REQUEST["numemp"];
+    $update=<<<SQL
+            update empleados
+            set(nombre=:nombre,apellido=:apellido,telefono=:telefono,sexo=:sexo)
+            where numemp={$_REQUEST["numemp"]}
+SQL;
+    
+    $resultado=$baseDatos->prepare($update);
+    
     $nombre=$_REQUEST["nombre"];
     $apellido=$_REQUEST["apellido"];
     $telefono=$_REQUEST["telefono"];
     $sexo=$_REQUEST["sexo"];
-
-    $resultado->bindParam(":numemp",$numemp);
+    
     $resultado->bindParam(":nombre",$nombre);
     $resultado->bindParam(":apellido",$apellido);
     $resultado->bindParam("telefono",$telefono);
@@ -49,7 +52,7 @@ else{
 
     if($control){
 
-       header("Location:../mensaje.php?origen=insertar");
+       header("Location:../mensaje.php?origen=modificar");
 
     }
 
@@ -61,8 +64,4 @@ else{
 }
 
 ?>
-
-
-
-
 

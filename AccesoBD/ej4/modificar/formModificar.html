@@ -46,21 +46,37 @@
                     }
                     
                     else{
+                                                
+                        respuesta=respuesta.split("#");
                         
-                        alert(respuesta);
+                        document.getElementById("numemp").value=respuesta[0];
+                        document.getElementById("nombre").value=respuesta[1];
+                        document.getElementById("apellido").value=respuesta[2];
+                        document.getElementById("telefono").value=respuesta[4];
                         
-                        document.getElementById("numemp").value=respuesta;
-                        document.getElementById("nombre").value=respuesta;
-                        document.getElementById("apellido").value=respuesta;
-                        document.getElementById("telefono").value=respuesta;
-                        document.getElementById("sexo").innerHTML=respuesta;
+                        var selected=""
                         
-                        document.getElementById("numemp").removeAttribute("disabled");
+                        
+                        
+                        if(respuesta[3]=="hombre"){
+                            
+                            selected=0;
+                                                        
+                        }
+                        
+                        else{
+                            
+                            selected=1;
+                        }
+                        
+                        document.getElementById("sexo").selectedIndex=selected;
+                        
+                        document.getElementById("numemp").setAttribute("disabled","disabled");
                         document.getElementById("nombre").removeAttribute("disabled");
                         document.getElementById("apellido").removeAttribute("disabled");
                         document.getElementById("telefono").removeAttribute("disabled");
                         document.getElementById("sexo").removeAttribute("disabled");
-                        document.getElementById("recuperar").setAttribute("disabled");
+                        document.getElementById("recuperar").removeAttribute("disabled");  
                     }
                 }                    
             }
@@ -91,10 +107,10 @@
             
             </select><br/>
             <input type="button" value="Recuperar datos" id="recuperar" onclick="consulta()"/>
-            <input type="submit" value="Modificar empleado" disabled/>
+            <input type="submit" value="Modificar empleado" id="modificar"/>
         
         </form>
-        <input type="button" value="Volver al menú" onclick="location.href='menu.html'"/>
+        <input type="button" value="Volver al menú" onclick="location.href='../menu.html'"/>
     </div>
     
 </body>
