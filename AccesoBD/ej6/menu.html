@@ -1,0 +1,122 @@
+<html>
+<head>
+    
+    <meta charset="utf-8"/>
+
+    <style>
+        
+        input{
+            
+            margin: 3px;
+            
+        }
+        
+        fieldset{
+            
+            width: 35%;
+            
+        }
+    
+    
+    </style>
+    
+    <script>
+    
+        function comprobar(){
+            
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.open("POST","funciones/comprobar.php",true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            
+            var numemp=document.getElementById("numemp").value; 
+
+            xmlhttp.send("numemp="+numemp);
+
+            xmlhttp.onreadystatechange=function(){
+
+                if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                    
+                    var respuesta=xmlhttp.responseText;
+                    
+                    if(respuesta){
+                        
+                        document.getElementById("mensaje").innerHTML="Número de empleado registrado";
+                                    
+                    }
+                    
+                    else{
+                        
+                        document.getElementById("mensaje").innerHTML="Número de empleado no registrado";
+                        
+                    }
+                }
+            }
+        }
+        
+        function crear(){
+            
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.open("POST","funciones/comprobar.php",true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            
+            var numemp=document.getElementById("numemp").value; 
+
+            xmlhttp.send("numemp="+numemp+"&comprobar="+true);
+
+            xmlhttp.onreadystatechange=function(){
+
+                if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                    
+                    var respuesta=xmlhttp.responseText;
+                    
+                    if(respuesta){
+                        
+                        document.getElementById("mensaje").innerHTML="Número de empleado registrado";
+                                    
+                    }
+                    
+                    else{
+                        
+                        document.getElementById("mensaje").innerHTML="Número de empleado no registrado";
+                        
+                    }
+                }
+            }
+        }
+    
+    </script>
+    
+    
+</head>
+<body>
+    
+    <div class="contenido">
+        
+        <form method="get" action="insertar.php">
+        <fieldset>
+            <legend>Datos de Usuario</legend>
+            Nº Empleado <input type="text" name="numemp" id="numemp" onkeyup=""/>
+            <br/>
+            <span id="mensaje"></span>
+            <br/>
+            Nombre <input type="text" name="nombre" id="nombre"/><br/>
+            Apellido <input type="text" name="apellido" id="apellido"/><br/>
+            Teléfono <input type="text" name="telefono" id="telefono"/><br/>
+            Sexo <select name="sexo" id="sexo">
+            
+                <option value="hombre">Hombre</option>
+                <option value="mujer">Mujer</option>            
+            
+            </select><br/>
+            <input type="submit" value="Crear"/>
+            <input type="submit" value="Consultar"/>
+            <input type="submit" value="Actualizar"/>
+            <input type="submit" value="Borrar"/>
+            
+        </fieldset>
+        
+        </form>
+    </div>
+    
+</body>
+</html>

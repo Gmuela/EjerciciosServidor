@@ -71,7 +71,7 @@
                         
                         document.getElementById("sexo").selectedIndex=selected;
                         
-                        document.getElementById("numemp").setAttribute("disabled","disabled");
+                        document.getElementById("numemp").setAttribute("readonly","readnly");
                         document.getElementById("nombre").removeAttribute("disabled");
                         document.getElementById("apellido").removeAttribute("disabled");
                         document.getElementById("telefono").removeAttribute("disabled");
@@ -82,16 +82,13 @@
             }
             
         }
-    
-    
     </script>
-    
     
 </head>
 <body>
     
     <div class="contenido">
-        <form method="get" action="modificar.php">
+        <form method="post" action="modificar.php">
             
             <h2>Modificar epleado registrado</h2>
             <h4>Escribe el Nº de Empleado ara recuperar sus datos</h4>

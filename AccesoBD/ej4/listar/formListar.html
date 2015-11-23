@@ -1,7 +1,99 @@
-<?php
+<html>
+<head>
+    
+    <meta charset="utf-8"/>
 
+    <style>
+        
+        .contenido{
+            
+            text-align: center;
+            margin: 10px auto;
+            
+        }
+        
+        input{
+            
+            margin: 10px;
+            
+        }
+        
+        #resp{
+            
+            margin: 0 400px;
 
+            
+        }
+        
+        table,tr,td,th{
+            
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            
+        }       
+       
+    
+    </style>
+    
+    <script>
+    
+        function consulta(){
+            
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.open("POST","listar.php",true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            
+            var numemp=document.getElementById("numemp").value; 
 
-echo "<input type=\"button\" value=\"Volver al menú\" onclick=\"location.href='menu.html'\"/><br/>";
+            xmlhttp.send("numemp="+numemp+"&recuperar="+true);
 
-?>
+            xmlhttp.onreadystatechange=function(){
+
+                if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                    
+                    var respuesta=xmlhttp.responseText;
+                    
+                    if(respuesta==false){
+                        
+                        document.getElementById("resp").innerHTML="Número de empleado no encontrado";
+                        
+                    }
+                    
+                    else{
+                                                
+                        respuesta=respuesta.split("#");                        
+                        
+                        document.getElementById("resp").innerHTML="<table><tr><th>Nº Empleado</th><th>Nombre</th><th>Apellido</th><th>Sexo</th><th>Teléfono</th></tr><tr><td>"+respuesta[0]+"</td><td>"+respuesta[1]+"</td><td>"+respuesta[2]+"</td><td>"+respuesta[3]+"</td><td>"+respuesta[4]+"</td></tr></table>";
+                        
+                    }
+                }                    
+            }
+            
+        }
+    
+    
+    </script>
+    
+    
+</head>
+<body>
+    
+    <div class="contenido">
+        <form method="get" action="listar.php">
+            
+            <h2>Consultar información de un empleado</h2>
+            <h4>Escribe el Nº de Empleado para consultar sus datos</h4>
+            
+            Nº Empleado <input type="text" name="numemp" id="numemp" placeholder="Escribe el nº de empleado"/><br/>
+            
+            <div id="resp"></div>
+            
+            </select><br/>
+            <input type="button" value="Consultar" id="consultar" onclick="consulta()"/>        
+        </form>  
+    <input type="button" value="Volver al menú" onclick="location.href='../menu.html'"/>
+    </div>
+    
+</body>
+</html>

@@ -1,7 +1,95 @@
-<?php
+<html>
+<head>
+    
+    <meta charset="utf-8"/>
 
+    <style>
+        
+        .contenido{
+            
+            text-align: center;
+            margin: 10px auto;
+            
+        }
+        
+        input{
+            
+            margin: 10px;
+            
+        }
+        
+        #resp{
+            
+            color: darkred;
+            font-weight:  bold;
+            
+        }
+    
+    
+    </style>
+    
+    <script>
+    
+        function consulta(){
+            
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.open("POST","borrar.php",true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            
+            var numemp=document.getElementById("numemp").value; 
 
+            xmlhttp.send("numemp="+numemp+"&recuperar="+true);
 
-echo "<input type=\"button\" value=\"Volver al menú\" onclick=\"location.href='menu.html'\"/><br/>";
+            xmlhttp.onreadystatechange=function(){
 
-?>
+                if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                    
+                    var respuesta=xmlhttp.responseText;
+                    
+                    if(respuesta==false){
+                        
+                        document.getElementById("resp").innerHTML="Número de empleado no encontrado";
+                        
+                    }
+                    
+                    else{
+                                                
+                        respuesta=respuesta.split("#");                        
+                        
+                        document.getElementById("resp").innerHTML="Se va a borrar el siguiente empleado, confirme que es el que desea borrar y pulse Confirmar<br/><br/>Nombre: "+respuesta[1]+"<br/>Apellido: "+respuesta[2]+"<br/>Nº Empleado: "+respuesta[0];
+                        
+                        document.getElementById("confirmar").removeAttribute("disabled");
+                        
+                    }
+                }                    
+            }
+            
+        }
+    
+    
+    </script>
+    
+    
+</head>
+<body>
+    
+    <div class="contenido">
+        <form method="get" action="borrar.php">
+            
+            <h2>Borrar empleado registrado</h2>
+            <h4>Escribe el Nº de Empleado para borrar sus datos</h4>
+            
+            Nº Empleado <input type="text" name="numemp" id="numemp" placeholder="Escribe el nº de empleado"/><br/>
+            
+            <div id="resp"></div>
+            
+            </select><br/>
+            <input type="button" value="Borrar empleado" id="borrar" onclick="consulta()"/>
+            <input type="submit" value="Confirmar" id="confirmar" disabled/>
+        
+        </form>
+        <input type="button" value="Volver al menú" onclick="location.href='../menu.html'"/>
+    </div>
+    
+</body>
+</html>
