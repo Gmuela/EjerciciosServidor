@@ -4,9 +4,24 @@ require_once "../conectSQL.php";
 
 $baseDatos=conectarMySQL();
     
-$consulta="SELECT * FROM empleados WHERE numemp={$_REQUEST["numemp"]}";
+$consulta="SELECT * FROM empleados WHERE numemp=:numemp";
 
-$resultado=$baseDatos->query($consulta);
+$preparado=$baseDatos->prepare($consulta);
 
+$preparado->bindParam(":numemp",$_REQUEST["numemp"]);
+$preparado->execute();
+
+$consulta=$preparado->fetchAll();
+
+if($consulta!=[]){
+    
+    echo 1;
+}
+
+else{
+    
+    echo 0;
+    
+}
 
 ?>

@@ -13,77 +13,213 @@
         
         fieldset{
             
-            width: 35%;
+            width: 45%;
             
         }
-    
-    
+        
     </style>
     
+    <script type="text/javascript" src="http://form-serialize.googlecode.com/svn/trunk/serialize-0.2.min.js"></script>
+
     <script>
-    
-        function comprobar(){
             
+    function comprobar(){
+        
+        var numemp=document.getElementById("numemp").value;
+        
+        document.getElementById("nombre").value="";
+        document.getElementById("apellido").value="";
+        document.getElementById("telefono").value="";       
+        document.getElementById("sexo").selectedIndex=0;
+        
+        if(numemp==""){
+            
+            document.getElementById("mensaje").innerHTML="";
+            
+            document.getElementById("idBorrar").setAttribute("disabled","disabled");
+            document.getElementById("idConsultar").setAttribute("disabled","disabled");
+            document.getElementById("idActualizar").setAttribute("disabled","disabled");
+            document.getElementById("idCrear").setAttribute("disabled","disabled");
+            
+        }
+        
+        else{
+
             var xmlhttp=new XMLHttpRequest();
             xmlhttp.open("POST","funciones/comprobar.php",true);
             xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            
-            var numemp=document.getElementById("numemp").value; 
+
+
 
             xmlhttp.send("numemp="+numemp);
 
             xmlhttp.onreadystatechange=function(){
 
                 if(xmlhttp.readyState==4 && xmlhttp.status==200){
-                    
+
                     var respuesta=xmlhttp.responseText;
-                    
-                    if(respuesta){
-                        
+
+                    if(respuesta==1){
+
                         document.getElementById("mensaje").innerHTML="Número de empleado registrado";
-                                    
+
+                        document.getElementById("idBorrar").removeAttribute("disabled");
+                        document.getElementById("idConsultar").removeAttribute("disabled");
+                        document.getElementById("idActualizar").removeAttribute("disabled");
+                        document.getElementById("idCrear").setAttribute("disabled","disabled");
+
                     }
-                    
+
                     else{
-                        
+
                         document.getElementById("mensaje").innerHTML="Número de empleado no registrado";
-                        
+
+                        document.getElementById("idBorrar").setAttribute("disabled","disabled");
+                        document.getElementById("idConsultar").setAttribute("disabled","disabled");
+                        document.getElementById("idActualizar").setAttribute("disabled","disabled");
+                        document.getElementById("idCrear").removeAttribute("disabled");
                     }
                 }
             }
         }
-        
-        function crear(){
-            
-            var xmlhttp=new XMLHttpRequest();
-            xmlhttp.open("POST","funciones/comprobar.php",true);
-            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            
-            var numemp=document.getElementById("numemp").value; 
+    }
 
-            xmlhttp.send("numemp="+numemp+"&comprobar="+true);
+    function borrar(){
 
-            xmlhttp.onreadystatechange=function(){
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("POST","funciones/funciones.php",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 
-                if(xmlhttp.readyState==4 && xmlhttp.status==200){
-                    
-                    var respuesta=xmlhttp.responseText;
-                    
-                    if(respuesta){
-                        
-                        document.getElementById("mensaje").innerHTML="Número de empleado registrado";
-                                    
-                    }
-                    
-                    else{
-                        
-                        document.getElementById("mensaje").innerHTML="Número de empleado no registrado";
-                        
-                    }
+        var numemp=document.getElementById("numemp").value; 
+
+        xmlhttp.send("numemp="+numemp+"&funcion=borrar");
+
+        xmlhttp.onreadystatechange=function(){
+
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+
+                var respuesta=xmlhttp.responseText;
+
+                if(respuesta==1){
+
+                    document.getElementById("sistema").innerHTML="Empleado borrado correctamente"; 
+
+                }
+
+                else{
+
+                    document.getElementById("sistema").innerHTML="Ha ocurrido un error en el borrado";
+
                 }
             }
         }
-    
+    }
+
+    function consultar(){
+
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("POST","funciones/funciones.php",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+        var numemp=document.getElementById("numemp").value; 
+
+        xmlhttp.send("numemp="+numemp+"&funcion=consultar");
+
+        xmlhttp.onreadystatechange=function(){
+
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+
+                var respuesta=xmlhttp.responseText;
+
+                respuesta=respuesta.split("#"); 
+
+                document.getElementById("nombre").value=respuesta[1];
+                document.getElementById("apellido").value=respuesta[2];
+                document.getElementById("telefono").value=respuesta[4];
+
+                var selected="";
+
+                if(respuesta[3]=="hombre"){
+
+                    selected=0;                                                        
+                }
+
+                else{
+
+                    selected=1;
+                }
+
+                document.getElementById("sexo").selectedIndex=selected;  
+
+                document.getElementById("sistema").innerHTML="Consulta realizada correctamente";
+            }
+        }
+    }
+
+    function crear(){
+
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("POST","funciones/funciones.php",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+        var numemp=document.getElementById("numemp").value; 
+        var datosSerializados = serialize(document.getElementById("idFormulario"));
+
+        xmlhttp.send(datosSerializados+"&funcion=crear");            
+
+        xmlhttp.onreadystatechange=function(){
+
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+
+                var respuesta=xmlhttp.responseText;                    
+
+                if(respuesta==1){
+
+                    document.getElementById("sistema").innerHTML="Empleado creado correctamente"; 
+
+                }
+
+                else{
+
+                    document.getElementById("sistema").innerHTML="Ha ocurrido un error en la creación";
+
+                }
+            }
+        }
+    }
+
+    function actualizar(){
+
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("POST","funciones/funciones.php",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+        var numemp=document.getElementById("numemp").value; 
+        var datosSerializados = serialize(document.getElementById("idFormulario"));
+
+        xmlhttp.send(datosSerializados+"&funcion=actualizar");            
+
+        xmlhttp.onreadystatechange=function(){
+
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+
+                var respuesta=xmlhttp.responseText;                    
+
+                if(respuesta==1){
+
+                    document.getElementById("sistema").innerHTML="Empleado actualizado correctamente"; 
+
+                }
+
+                else{
+
+                    document.getElementById("sistema").innerHTML="Ha ocurrido un error en la actualización";
+
+                }
+            }
+        }
+    }
+
     </script>
     
     
@@ -92,11 +228,11 @@
     
     <div class="contenido">
         
-        <form method="get" action="insertar.php">
+        <form method="get" action="insertar.php" id="idFormulario">
         <fieldset>
             <legend>Datos de Usuario</legend>
-            Nº Empleado <input type="text" name="numemp" id="numemp" onkeyup=""/>
-            <br/>
+            Nº Empleado <input type="text" name="numemp" id="numemp" onkeyup="comprobar()"/>
+            
             <span id="mensaje"></span>
             <br/>
             Nombre <input type="text" name="nombre" id="nombre"/><br/>
@@ -105,15 +241,25 @@
             Sexo <select name="sexo" id="sexo">
             
                 <option value="hombre">Hombre</option>
-                <option value="mujer">Mujer</option>            
+                <option value="mujer">Mujer</option>           
             
             </select><br/>
-            <input type="submit" value="Crear"/>
-            <input type="submit" value="Consultar"/>
-            <input type="submit" value="Actualizar"/>
-            <input type="submit" value="Borrar"/>
+            
+            <input type="hidden" id="existe" name="existe"/>
+            
+            
+            <input type="button" onclick="crear()" value="Crear" id="idCrear" disabled/>
+            <input type="button" onclick="consultar()" value="Consultar" id="idConsultar" disabled/>
+            <input type="button" onclick="actualizar()" value="Actualizar" id="idActualizar" disabled/>
+            <input type="button" onclick="borrar()" value="Borrar" id="idBorrar" disabled/>
             
         </fieldset>
+            
+            <fieldset>
+                <legend>Mensajes del sistema</legend>
+                <div id="sistema"></div>
+            
+            </fieldset>
         
         </form>
     </div>

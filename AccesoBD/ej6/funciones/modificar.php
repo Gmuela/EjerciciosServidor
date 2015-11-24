@@ -53,13 +53,12 @@ SQL;
 
     if ($control) {
 
-       header("Location:../mensaje.php?origen=modificar");
-
+       echo 1;
     }
 
     else{
 
-        header("Location:../mensaje.php?origen=error");
+        echo 0;
 
     }
 }
