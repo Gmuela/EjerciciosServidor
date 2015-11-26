@@ -14,7 +14,7 @@ function consultaBD(){
     
     $baseDatos=null;
     
-    return $resultado[0];
+    return $resultado[0]["mensaje"];
     
 }
 
