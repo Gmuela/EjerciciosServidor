@@ -4,7 +4,6 @@ require_once "../conectSQL.php";
 
 $baseDatos=conectarMySQL();
 
-
 if(isset($_REQUEST["recuperar"])){
     
     $consulta="SELECT * FROM empleados WHERE numemp={$_REQUEST["numemp"]}";
@@ -64,4 +63,3 @@ SQL;
 }
 
 ?>
-
