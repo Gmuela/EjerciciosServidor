@@ -6,7 +6,9 @@ class DeporteController extends BaseController{
     
     function listarGet(){
         
-        $this->returnView("",false);
+        $this->createModel();
+        $misDatos["mainView"]["deportes"]=$this->model->getDeportes();
+        $this->returnView($misDatos,false);
         
     }   
     
