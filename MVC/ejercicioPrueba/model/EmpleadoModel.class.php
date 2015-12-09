@@ -2,19 +2,19 @@
 
 require_once "BaseModel.class.php";
 
-class DepartamentoModel extends BaseModel{
+class EmpleadoModel extends BaseModel{
     
-    function getDepartamentos(){
+    function getEmpleado(){
         
         
-        $returnDeparts=[];
-        $prepare=$this->db->prepare("Select nombre from departamentos");
+        $returnEmple=[];
+        $prepare=$this->db->prepare("Select nombre from empleados");
         $prepare->execute();
         $datosBD=$prepare->fetchAll();
         
-        foreach($datosBD as $depart){
+        foreach($datosBD as $emple){
             
-            array_push($returnDeparts, $depart["nombre"]);
+            array_push($returnEmple, $emple["nombre"]);
             
         }
         
@@ -25,12 +25,12 @@ class DepartamentoModel extends BaseModel{
     }
     
     
-    function setDepartamento($nuevoDepart){ 
+    /*function setDepartamento($nuevoDepart){ 
         
         $insert="insert into departamentos(nombre) value(:nombreDepart)";
         
         $prepare=$this->db->prepare($insert);
         $prepare->bindParam(":nombreDepart",$nuevoDepart);
         $prepare->execute();         
-    }    
+    }*/    
 }

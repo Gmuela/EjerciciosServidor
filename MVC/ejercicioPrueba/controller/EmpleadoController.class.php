@@ -2,25 +2,25 @@
 
 require_once "BaseController.class.php";
 
-class DepartamentoController extends BaseController{
+class EmpleadoController extends BaseController{
     
     function listarGet(){
         
         $this->createModel();
-        $departamentos["mainView"]["departamentos"]=$this->model->getDepartamentos();
-        $this->returnView($departamentos,false);
+        $departamentos["mainView"]["empleados"]=$this->model->getEmpleados();
+        $this->returnView($empleados,false);
         
     }
     
     function listarPost(){
         
-        $departamentos["mainView"]["departamentos"]=$_REQUEST["departamentos"];
+        $departamentos["mainView"]["empleados"]=$_REQUEST["empleados"];
         
-        $this->returnView($departamentos,false);
+        $this->returnView($empleados,false);
         
     }
     
-    function crearGet(){
+    /*function crearGet(){
         
         $this->returnView("",false);
         
@@ -36,6 +36,6 @@ class DepartamentoController extends BaseController{
         
         $this->returnView("",false);
         
-    }
+    }*/
     
 }

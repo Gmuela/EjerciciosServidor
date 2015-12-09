@@ -2,10 +2,10 @@
 
 <form action="<?=UriParser::getBaseUri()?>Departamento/crear" method="post">
 
-    Número de departamentos a crear <input type="text" name="numCols"/>
+    Departamento
+    <input type="text" name="nuevoDepart" />
+
     <br/>
-    Departamentos <input type="text" name="nuevosDeparts"/>
-<br/>
-<br/>
-<input type="submit" value="Enviar"/>
+    <br/>
+    <input type="submit" value="Enviar" />
 </form>
