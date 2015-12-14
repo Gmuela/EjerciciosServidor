@@ -65,7 +65,42 @@ class Home extends CI_Controller{
         
         $this->load->view("holaDatos",$usuario);
         
-    }    
+    }
+    
+    public function cargarLinks(){
+        
+        $datos=[
+            
+            "links"=> [
+                
+            ["url"=>"http://www.google.com","texto"=>"Google"],
+                
+            ["url"=>"http://www.amazon.es","texto"=>"Amazon"],
+            
+            ["url"=>"http://www.pccomponentes.com","texto"=>"PCComponentes"],
+            
+            ["url"=>"http://www.ebay.com","texto"=>"Ebay"]
+            
+            ]
+        ];
+        
+        $this->load->helper("url");
+        
+        $this->load->view("linksFavoritos",$datos);
+        
+        
+    }
+    
+    public function cargarLinksModel(){
+        
+        
+        
+        $this->load->helper("url");
+        
+        $this->load->view("linksFavoritos",$datos);
+        
+        
+    }
 }
 
 
