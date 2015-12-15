@@ -93,12 +93,44 @@ class Home extends CI_Controller{
     
     public function cargarLinksModel(){
         
+        $this->load->model("enlaces_model");
         
+        $datos=$this->enlaces_model->getEnlaces();
         
         $this->load->helper("url");
         
         $this->load->view("linksFavoritos",$datos);
         
+        
+    }
+    
+    public function crearLinkGet(){
+        
+        $this->load->view("crearlinkget");
+        
+    }
+    
+    public function crearLinkPost(){
+        
+        $this->load->model("enlaces_model");
+        
+        $url=$_REQUEST["url"];
+        
+        $texto=$_REQUEST["texto"];
+        
+        $check=$this->enlaces_model->guardar($url,$texto);
+        
+        if($check){
+            
+            $this->load->view("crearLinkPost");
+            
+        }
+        
+        else{
+            
+            $this->load->view("error");
+            
+        }
         
     }
 }
