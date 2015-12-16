@@ -1,4 +1,4 @@
-<form action="crearlinkpost" method="get">
+<form action="crearlinkpost" method="post">
 
     URL
     <input type="text" name="url" /> 

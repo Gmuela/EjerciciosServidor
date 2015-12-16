@@ -95,7 +95,7 @@ class Home extends CI_Controller{
         
         $this->load->model("enlaces_model");
         
-        $datos=$this->enlaces_model->getEnlaces();
+        $datos["links"]=$this->enlaces_model->getEnlaces();
         
         $this->load->helper("url");
         

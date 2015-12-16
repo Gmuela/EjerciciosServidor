@@ -3,7 +3,7 @@
 <ul>
     <?php foreach($links as $link):?>
         <li>
-            <?=anchor($link["url"],$link["texto"]);?>
+            <?=anchor($link->url,$link->texto);?>
         </li>
         <?php endforeach;?>
 </ul>
