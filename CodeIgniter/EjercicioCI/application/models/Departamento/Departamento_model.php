@@ -4,6 +4,8 @@ class Departamento_model extends CI_Model{
     
     public $nombre;
     
+    public $iddep;
+    
     function getDepartamentos(){
         
         $this->load->database();
