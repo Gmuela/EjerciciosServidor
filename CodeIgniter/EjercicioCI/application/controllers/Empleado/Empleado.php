@@ -11,18 +11,36 @@ class Empleado extends CI_Controller{
     function listarEmpleados(){
         
         $this->load->model("Empleado/empleado_model");
+        $this->load->model("Departamento/departamento_model");
         
-        $datos["empleados"] = $this->empleado_model->getEmpleados();
+        if(isset($_REQUEST["departamento"])){
+            
+            $iddep=$_REQUEST["departamento"];
+            
+            if($iddep==0){
+                
+               $datos["empleados"] = $this->empleado_model->getEmpleadosDep(); 
+                
+            }
+            
+            else{
+                    
+                $datos["empleados"] = $this->empleado_model->getEmpleadosDepSelect($iddep);    
+                
+            }
+        }
         
-        $enviar = $this->empleado_model->getEmpleados();
+        else{
+            
+            $datos["empleados"] = $this->empleado_model->getEmpleadosDep();         
+        }
         
-        $datos["departamentos"] = $this->empleado_model->getDepEmpleados($enviar);
-        
-        
+        $datos["departamentos"] = $this->departamento_model->getDepartamentos();         
         
         $this->load->view("empleado/listarEmpleados",$datos);
         
-    }     
+    }    
+    
 }
     
     

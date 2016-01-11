@@ -20,33 +20,28 @@ class Empleado_model extends CI_Model{
         
     }
     
-    function getDepEmpleados($datos){
+    function getEmpleadosDep(){
         
-        $this->load->database();
-        
-        $i=0;
-        
-       $res= $this->db->query("SELECT nombre FROM `departamentos` WHERE iddep=1");
-        $res->result();
-        
-        var_dump($res);
-        
-        /******************************************************/
-        
-        
-        foreach($datos as $dato){
+        $this->load->database(); 
             
-            $iddep = $dato->iddep;
-            
-            $query = "SELECT nombre FROM `departamentos` WHERE iddep=$iddep";             
-            
-            $i++;
-            
-        }
-        
-        //return $arrayDep;
-        
+        $sql="SELECT e.nombre as nombre, e.apellidos as apellidos, d.nombre as depnombre FROM empleados e, departamentos d WHERE e.iddep=d.iddep";
+
+        $nombre = $this->db->query($sql)->result();       
+
+         return $nombre;
     }
+    
+    function getEmpleadosDepSelect($iddep){
+        
+        $this->load->database(); 
+            
+        $sql="SELECT e.nombre as nombre, e.apellidos as apellidos, d.nombre as depnombre FROM empleados e, departamentos d WHERE e.iddep=$iddep and e.iddep=d.iddep";
+
+        $nombre = $this->db->query($sql)->result();       
+
+        return $nombre;
+    }
+    
     
     /*function insertDepartamento($nombreDepartamento){
         
