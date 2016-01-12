@@ -39,9 +39,7 @@ class Empleado extends CI_Controller{
         
         $this->load->view("empleado/listarEmpleados",$datos);
         
-    }    
-    
+    } 
+   
 }
-    
-    
 ?>
