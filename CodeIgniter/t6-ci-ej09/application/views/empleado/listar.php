@@ -2,12 +2,12 @@
     var conexion;
 
     function filtrarDep() {
-        var iddep = document.getElementById('iddep');
+        var iddep = document.getElementById('iddep').value;
         conexion = new XMLHttpRequest();
         conexion.open('POST', '<?= base_url() ?>empleado/listarPost', true);
         conexion.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         conexion.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        conexion.send(iddep);
+        conexion.send('iddep='+iddep);
         conexion.onreadystatechange = function() {
             if (conexion.readyState == 4 && conexion.status == 200) {
                 accionAJAX();
@@ -23,7 +23,7 @@
 </script>
 
 <h3>Listado de empleados</h3> Departamento
-<select id="iddep" onchange="filtrarDep()">
+<select id="iddep" onchange="filtrarDep()" name="iddep">
 
     <option value="0">Todos</option>
 

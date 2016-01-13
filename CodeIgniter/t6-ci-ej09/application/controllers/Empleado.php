@@ -24,7 +24,7 @@ class Empleado extends CI_Controller {
         $this->load->model("empleado_model");
         $this->load->model("departamento_model");
             
-        $datos["empleados"] = $this->empleado_model->getEmpleadosDepSelect($_REQUEST("iddep"));      
+        $datos["empleados"] = $this->empleado_model->getEmpleadosDepSelect($_REQUEST['iddep']);      
         $datos["departamentos"] = $this->departamento_model->leerTodos();      
                  
         

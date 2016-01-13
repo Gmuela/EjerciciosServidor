@@ -35,9 +35,13 @@ class Empleado_model extends CI_Model{
         
         $this->load->database(); 
             
-        $sql="SELECT e.nombre as nombre, e.apellidos as apellidos, d.nombre as depnombre FROM empleados e, departamentos d WHERE e.iddep=$iddep and e.iddep=d.iddep";
+        $sql = <<<SQL
+            SELECT e.nombre as nombre, e.apellido as apellido, d.nombre as depnombre
+            FROM empleados e, departamentos d 
+            WHERE e.iddep=? and e.iddep=d.iddep
+SQL;
 
-        $nombre = $this->db->query($sql)->result();       
+        $nombre = $this->db->query($sql,$iddep)->result();       
 
         return $nombre;
     }
