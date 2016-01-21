@@ -26,9 +26,8 @@ class Empleado extends CI_Controller {
             
         $datos["empleados"] = $this->empleado_model->getEmpleadosDepSelect($_REQUEST['iddep']);      
         $datos["departamentos"] = $this->departamento_model->leerTodos();      
-                 
-        
-        enmarcar($this, 'empleado/listar',$datos);
+            
+        enmarcar2($this, 'empleado/listar',$datos);
         
     
 	}
